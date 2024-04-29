@@ -11,7 +11,7 @@ get_os() {
 japache() {
     if [[ "$1" == "v" || "$1" == "-v" ]];then
         echo -e "${YELLOW}J${NC}${RED}apache${NC}"
-        echo -e "${BOLD}v0.1.0${NC}"
+        echo -e "${BOLD}v0.1.1${NC}"
         echo -e "${YELLOW}JAP plugin${NC}"
         echo -e  "-----------------------"
         echo -e "${BLUE}OS: '$(get_os)'${NC}"
@@ -86,12 +86,14 @@ aps() {
 }
 
 host() {
+     os=$(get_os)
      if [[ $os == "ai" || $os == "as" ]];then
         code /etc/hosts
      fi
 }
 
 vhost() {
+    os=$(get_os)
     if [[ $os == "ai" ]];then
         code /usr/local/etc/httpd/extra/httpd-vhosts.conf
     fi
