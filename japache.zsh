@@ -11,7 +11,7 @@ get_os() {
 japache() {
     if [[ "$1" == "v" || "$1" == "-v" ]];then
         echo -e "${YELLOW}J${NC}${RED}apache${NC}"
-        echo -e "${BOLD}v0.1.1${NC}"
+        echo -e "${BOLD}v0.1.2${NC}"
         echo -e "${YELLOW}JAP plugin${NC}"
         echo -e  "-----------------------"
         echo -e "${BLUE}OS: '$(get_os)'${NC}"
@@ -33,7 +33,8 @@ japache() {
 
     if [[ "$1" == "s" || "$1" == "status" ]];then
         os=$(get_os)
-        if curl -s -o /dev/null -I -w "%{http_code}" http://localhost/ | grep -q "200"; then
+        ip="$(jip -r local)"
+        if curl -s -o /dev/null -I -w "%{http_code}" http://$ip/ | grep -q "200"; then
             echo -e "${GREEN}${BOLD}Apache is active${NC}"
         else
             echo -e "${RED}${BOLD}Apache is not active${NC}"
@@ -64,7 +65,8 @@ apr() {
 
 aps() {
     os=$(get_os)
-    if curl -s -o /dev/null -I -w "%{http_code}" http://localhost/ | grep -q "200"; then
+    ip="$(jip -r local)"
+    if curl -s -o /dev/null -I -w "%{http_code}" http://$ip/ | grep -q "200"; then
         if [[ $os == "l" ]];then
             echo "stop apache"
             sudo systemctl stop apache2
